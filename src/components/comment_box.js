@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
-export default class CommentBox extends Component {
+class CommentBox extends Component {
   constructor(props) {
     super(props);
 
@@ -15,6 +17,7 @@ export default class CommentBox extends Component {
 
   onSubmit(event) {
     event.preventDefault();
+    this.props.saveCommnet(this.state.comment);
     this.setState({ comment: ''})
   }
 
@@ -38,3 +41,7 @@ export default class CommentBox extends Component {
     )
   }
 }
+
+// by passing an object as a second arg, instead of mapDispatchToProps
+// redux is going to bind all of our actions to CommentBox container
+export default connect(null, actions)(CommentBox);
